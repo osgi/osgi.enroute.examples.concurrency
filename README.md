@@ -1,8 +1,5 @@
-<h1><img src="http://enroute.osgi.org/img/enroute-logo-64.png" witdh=40px style="float:left;margin: 0 1em 1em 0;width:40px">
-OSGi enRoute Archetype</h1>
+# OSGi enRout Concurrency Example And More
 
-This repository represents a template workspace for bndtools, it is the easiest way to get started with OSGi enRoute. The workspace is useful in an IDE (bndtools or Intellij) and has support for [continuous integration][2] with [gradle][3]. If you want to get started with enRoute, then follow the steps in the [quick-start guide][1].
+This workspace is a compendium to the [Concurrency & more](http://enroute.osgi.org/appnotes/concurrency.html) application note.
 
-[1]: http://enroute.osgi.org/quick-start.html
-[2]: http://enroute.osgi.org/tutorial_base/800-ci.html
-[3]: https://www.gradle.org/
+It contains many examples and templates for common problems when using DS. All examples have a test class that exercises them so it is possible to try them out in the debugger.
