@@ -7,17 +7,19 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.util.promise.Deferred;
+import org.osgi.util.promise.Promise;
 
 @Component
 public class Initialize implements Work {
-	final Deferred<Delegate>	deferred	= new Deferred<>();
-	volatile boolean closed;
-	
+	Promise<Delegate>	promise;
+	volatile boolean	closed;
+
 	@Reference
-	Executor					executor;
+	Executor			executor;
 
 	@Activate
 	void activate() throws Exception {
+		Deferred<Delegate> deferred = new Deferred<>();
 		executor.execute(() -> {
 			try {
 				Thread.sleep(2000); // long running init
@@ -26,16 +28,17 @@ public class Initialize implements Work {
 				deferred.fail(e);
 			}
 		});
+		promise = deferred.getPromise();
 	}
 
 	@Override
 	public void work() throws Exception {
-		deferred.getPromise().getValue().work();
+		promise.getValue().work();
 	}
 
 	@Deactivate
 	void deactivate() {
-		deferred.getPromise().onResolve(this::close);
+		promise.onResolve(this::close);
 	}
 
 	void close() {

@@ -13,18 +13,19 @@ import org.osgi.service.component.annotations.ReferencePolicy;
  * Demonstrates indexing a service by a property assuming no duplicates
  *
  */
-@Component(service=PlainIndexedServices.class, name="plain")
+@Component(service=PlainIndexedServices.class)
 public class PlainIndexedServices {
 
 	final ConcurrentMap<String, Foo> plainServices = new ConcurrentHashMap<>();
 
-	@Reference(cardinality=ReferenceCardinality.MULTIPLE, policy=ReferencePolicy.DYNAMIC)
+	@Reference(
+			cardinality=ReferenceCardinality.MULTIPLE, 
+			policy=ReferencePolicy.DYNAMIC)
 	void addFoo(Foo foo, Map<String, Object> props) {
 		String key = (String) props.get("id");
 		if (key == null)
 			return;
 
-		System.out.println("adding " + key + " " + foo);
 		plainServices.put(key, foo);
 	}
 
@@ -32,7 +33,7 @@ public class PlainIndexedServices {
 		String key = (String) props.get("id");
 		if (key == null)
 			return;
-		System.out.println("removing " + key );
+
 		plainServices.remove(key);
 	}
 }
