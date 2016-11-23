@@ -10,7 +10,7 @@ public class Serializer {
 
 
 	List<Runnable> serialized = null;
-	Object lock = new Object();
+	final Object lock = new Object();
 	
 	public void serialize(Runnable runnable) {
 	

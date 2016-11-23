@@ -80,4 +80,8 @@ public abstract class OSGiTestCase extends TestCase {
 			sleep(100);
 		}
 	}
+
+	public BundleContext getContext() {
+		return context;
+	}
 }

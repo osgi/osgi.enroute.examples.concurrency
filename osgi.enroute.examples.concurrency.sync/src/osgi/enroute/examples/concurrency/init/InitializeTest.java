@@ -10,14 +10,14 @@ public class InitializeTest extends OSGiTestCase {
 	
 	public void testWork() throws Exception {
 		Initialize init= (Initialize) getService(Work.class);
-		assertFalse(init.deferred.getPromise().isDone());
+		assertFalse(init.promise.isDone());
 		init.work();
-		assertTrue(init.deferred.getPromise().isDone());
+		assertTrue(init.promise.isDone());
 	}
 
 	public void testClose() throws Exception {
 		Initialize init= (Initialize) getService(Work.class);
-		assertFalse(init.deferred.getPromise().isDone());
+		assertFalse(init.promise.isDone());
 		tearDown();
 		assertFalse(init.closed);
 		sleep(1000);
